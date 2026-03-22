@@ -33,9 +33,25 @@ class check_bst{
     }
     //bst order inserion
     public node insert(node root,int data){
-        if(root==null) return new node(data);
-        if(data<root.data) root.left=insert(root.left,data);
-        else if(data>root.data) root.right=insert(root.right,data);
-        return root;
+        node newnode = new node(data);
+    if(root == null)
+        return newnode;
+    Queue<node> q = new LinkedList<>();
+    q.add(root);
+    while(!q.isEmpty()){
+        node temp = q.poll();
+        if(temp.left == null){
+            temp.left = newnode;
+            break;
+        }
+        else q.add(temp.left);
+
+        if(temp.right == null){
+            temp.right = newnode;
+            break;
+        }
+        else q.add(temp.right);
+    }
+    return root;
     }
 }
